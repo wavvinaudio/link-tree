@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAVvin Audio | Link-in-Bio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Animated Synthwave Background */
+        @keyframes bg-shift {
+            0% { background-position: 0% 50%, 100% 50%; }
+            50% { background-position: 100% 50%, 0% 50%; }
+            100% { background-position: 0% 50%, 100% 50%; }
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0b0f;
+            color: #f3f4f6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(124, 58, 237, 0.2) 0%, transparent 45%),
+                radial-gradient(circle at 85% 80%, rgba(236, 72, 153, 0.2) 0%, transparent 45%);
+            background-size: 200% 200%;
+            background-attachment: fixed;
+            animation: bg-shift 12s ease infinite;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Profile Header */
+        .profile-card {
+            margin-bottom: 20px;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 16px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #a855f7;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.4;
+            padding: 0 10px;
+        }
+
+        /* Audio Wave Indicator */
+        .audio-wave {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            margin: 14px 0 20px;
+        }
+
+        .audio-wave span {
+            width: 3px;
+            height: 14px;
+            background: #a855f7;
+            border-radius: 2px;
+            animation: bounce 1.2s infinite ease-in-out;
+        }
+
+        .audio-wave span:nth-child(2) { animation-delay: 0.2s; height: 22px; }
+        .audio-wave span:nth-child(3) { animation-delay: 0.4s; height: 10px; }
+        .audio-wave span:nth-child(4) { animation-delay: 0.1s; height: 25px; }
+        .audio-wave span:nth-child(5) { animation-delay: 0.3s; height: 16px; }
+
+        @keyframes bounce {
+            0%, 100% { transform: scaleY(0.4); opacity: 0.5; }
+            50% { transform: scaleY(1); opacity: 1; }
+        }
+
+        /* Player Containers & Pulse Glow */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 15px rgba(168, 85, 247, 0.1); }
+            50% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.3); }
+            100% { box-shadow: 0 0 15px rgba(168, 85, 247, 0.1); }
+        }
+
+        .player-container {
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            animation: pulse-glow 4s infinite ease-in-out;
+        }
+
+        /* Dark Mode Hack for SoundCloud */
+        .dark-mode-embed {
+            filter: invert(92%) hue-rotate(180deg);
+            border-radius: 12px;
+            animation: none;
+        }
+
+        /* Links List */
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 30px;
+        }
+
+        .link-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 14px 20px;
+            border-radius: 14px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .link-btn i.fa-brands, .link-btn i.fa-solid {
+            font-size: 1.1rem;
+        }
+
+        .link-btn span {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .link-btn:hover {
+            background: rgba(168, 85, 247, 0.15);
+            border-color: #a855f7;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            font-size: 0.75rem;
+            color: #64748b;
+        }
+
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Profile Section -->
+        <div class="profile-card">
+            <div class="avatar-container">
+                <img src="images/wave-profile.jpg" alt="WAVvin Audio" class="avatar">
+            </div>
+            <h1>WAVvin Audio</h1>
+            <p class="tagline">⚡🌍 Creative vision. Where artists, producers and ideas move on a different frequency.</p>
+            
+            <!-- Live Audio Visualizer Bars -->
+            <div class="audio-wave">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <!-- Embedded Spotify Player for Vice Drive -->
+        <div class="player-container">
+            <iframe style="border-radius:12px; display:block;" src="https://open.spotify.com/embed/album/5r0A9pZhbdwdBjepDqFgDU?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+
+        <!-- Embedded SoundCloud Playlist Player (Compact Tracklist & Dark Mode Enforced) -->
+        <div class="player-container dark-mode-embed">
+            <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/soundcloud%253Aplaylists%253A2306173914&color=%23f67f1e&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=false"></iframe>
+        </div>
+
+        <!-- Links Grid -->
+        <div class="links-list">
+            <a href="https://embed.music.apple.com/au/album/vice-drive/6815979706" target="_blank" class="link-btn">
+                <span><i class="fa-brands fa-apple" style="color: #fa233b;"></i> Listen on Apple Music</span>
+                <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; opacity: 0.5;"></i>
+            </a>
+
+            <a href="https://www.youtube.com/@WAVvin-Audio/playlists" target="_blank" class="link-btn">
+                <span><i class="fa-brands fa-youtube" style="color: #FF0000;"></i> YouTube Channel & Playlists</span>
+                <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; opacity: 0.5;"></i>
+            </a>
+
+            <a href="https://www.instagram.com/wavvin.audio/" target="_blank" class="link-btn">
+                <span><i class="fa-brands fa-instagram" style="color: #E1306C;"></i> Instagram Profile</span>
+                <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem; opacity: 0.5;"></i>
+            </a>
+        </div>
+
+        <!-- Footer Info -->
+        <footer>
+            <p>&copy; 2026 WAVvin Audio. All rights reserved.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
